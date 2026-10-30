@@ -1,0 +1,9 @@
+environment: dev
+replicaCount: 1
+
+image:
+  repository: ghcr.io/srijanb40/gitops-and-zero-downtime-deployment
+  tag: "1.0.0"
+
+autoscaling:
+  enabled: false

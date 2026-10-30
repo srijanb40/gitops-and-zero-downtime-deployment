@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-app-prod
+  namespace: argocd
+spec:
+  project: platform-demo
+
+  source:
+    repoURL: https://github.com/srijanb40/gitops-and-zero-downtime-deployment
+.git
+    targetRevision: main
+    path: helm/demo-app
+    helm:
+      valueFiles:
+        - values.yaml
+        - values-prod.yaml
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: demo-prod
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

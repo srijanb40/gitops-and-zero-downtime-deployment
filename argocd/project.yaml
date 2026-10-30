@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: platform-demo
+  namespace: argocd
+spec:
+  description: GitOps demo project for platform engineering
+
+  sourceRepos:
+    - https://github.com/srijanb40/gitops-and-zero-downtime-deployment
+.git
+
+  destinations:
+    - namespace: demo-dev
+      server: https://kubernetes.default.svc
+    - namespace: demo-prod
+      server: https://kubernetes.default.svc
+
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
+
+  clusterResourceWhitelist: []

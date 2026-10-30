@@ -1,0 +1,34 @@
+name: Helm Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+
+      - name: Helm lint
+        run: |
+          helm lint helm/demo-app
+
+      - name: Render development manifests
+        run: |
+          helm template demo-app helm/demo-app \
+            -f helm/demo-app/values-dev.yaml
+
+      - name: Render production manifests
+        run: |
+          helm template demo-app helm/demo-app \
+            -f helm/demo-app/values-prod.yaml

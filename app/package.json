@@ -1,0 +1,14 @@
+{
+  "name": "gitops-and-zero-downtime-deployment",
+  "version": "1.0.0",
+  "description": "GitOps and Zero Downtime Deployment
+",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "prom-client": "^15.1.3"
+  }
+}
